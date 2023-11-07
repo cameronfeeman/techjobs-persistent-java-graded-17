@@ -7,10 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.List;
-import java.util.Optional;
-
 /**
  * Created by LaunchCode
  */
@@ -32,7 +28,6 @@ public class HomeController {
         return "add";
     }
 
-    @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId) {
 

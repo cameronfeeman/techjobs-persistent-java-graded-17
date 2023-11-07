@@ -9,10 +9,17 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
+@MappedSuperclass
 public abstract class AbstractEntity {
 
+    //id becomes primary key all subclass will get id
+    @Id
+    @GeneratedValue
     private int id;
 
+    //add notation so the name cannot be empty and is a reasonable size
+   @NotNull
+   @Size(min = 1, max = 255)
     private String name;
 
     public int getId() {
