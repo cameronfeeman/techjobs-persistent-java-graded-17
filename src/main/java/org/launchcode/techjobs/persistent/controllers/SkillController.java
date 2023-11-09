@@ -18,6 +18,7 @@ public class SkillController {
     private SkillRepository skillRepository;
 
     @GetMapping
+    @RequestMapping("/") //empty string
     public String index(Model model) {
         //fetch all data from skill repository
         //Iterable<Skill> skills = skillRepository.findAll();

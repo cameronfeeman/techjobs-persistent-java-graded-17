@@ -19,6 +19,7 @@ public class EmployerController {
     private EmployerRepository employerRepository;
 
     @GetMapping
+    @RequestMapping("/") //empty string
     public String index(Model model) {
         //fetch all data from employer repository
         Iterable<Employer> employers = employerRepository.findAll();

@@ -5,6 +5,7 @@ import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +26,15 @@ public class HomeController {
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @GetMapping
     @RequestMapping("/")
     public String index(Model model) {
-
+        Iterable<Job> jobs = jobRepository.findAll();
         model.addAttribute("title", "MyJobs");
+        model.addAttribute("jobs", jobs);
 
         return "index";
     }
