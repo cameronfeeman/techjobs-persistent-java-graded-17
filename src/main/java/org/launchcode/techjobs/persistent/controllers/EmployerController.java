@@ -1,12 +1,13 @@
-import ch.qos.logback.core.model.Model;
+package org.launchcode.techjobs.persistent.controllers;
+
 import jakarta.validation.Valid;
+import org.springframework.ui.Model;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @Controller
@@ -32,8 +33,8 @@ public class EmployerController {
         return "employers/add";
     }
 
-    @PostMapping
-    public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer, Errors errors, Model model) {
+    @PostMapping("add")
+    public String processAddEmployerForm(@ModelAttribute("employer") @Valid Employer newEmployer, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return "employers/add";
@@ -42,7 +43,7 @@ public class EmployerController {
         //save the data using the Repository
         employerRepository.save(newEmployer);
 
-        return "redirect:";
+        return "redirect:/employers";
     }
 
     @GetMapping("view/{employerId}")
