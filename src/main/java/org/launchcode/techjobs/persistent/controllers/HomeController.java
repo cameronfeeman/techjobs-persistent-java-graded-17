@@ -3,6 +3,7 @@ package org.launchcode.techjobs.persistent.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
+import org.launchcode.techjobs.persistent.models.Skill;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.launchcode.techjobs.persistent.models.data.JobRepository;
 import org.launchcode.techjobs.persistent.models.data.SkillRepository;
@@ -41,39 +42,43 @@ public class HomeController {
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
-	model.addAttribute("title", "Add Job");
 
-    //Get data from employerRepository
-    Iterable<Employer> employers = employerRepository.findAll();
+        //Get data from employerRepository
+        Iterable<Employer> employers = employerRepository.findAll();
+        Iterable<Skill> skills = skillRepository.findAll();
+
+	model.addAttribute("title", "Add Job");
 
     //Add the data
     model.addAttribute("employers", employers);
         model.addAttribute(new Job());
+
+        model.addAttribute("skills", skills);
         return "add";
     }
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                       Errors errors, Model model, @RequestParam int employerId) {
+                                       Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
 	    model.addAttribute("title", "Add Job");
             return "add";
         }
         //get employer based off ID from employerRepository
-        Optional<Employer> employerOptional = employerRepository.findById((employerId));
+        Optional<Employer> employerOptional = employerRepository.findById(employerId);
 
         if (employerOptional.isPresent()) {
             Employer selectedEmployer = employerOptional.get();
 
             //set the selected employer for the new job
             newJob.setEmployer(selectedEmployer);
-        } else {
-            return "redirect:";
+//        } else {
+//            return "redirect:/employer";
         }
         jobRepository.save(newJob);
 
-        return "redirect:/jobs";
+        return "redirect:";
     }
 
     @GetMapping("view/{jobId}")

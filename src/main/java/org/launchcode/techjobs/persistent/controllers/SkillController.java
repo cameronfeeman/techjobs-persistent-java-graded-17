@@ -21,8 +21,8 @@ public class SkillController {
     @RequestMapping("/") //empty string
     public String index(Model model) {
         //fetch all data from skill repository
-        //Iterable<Skill> skills = skillRepository.findAll();
-        model.addAttribute("skills", skillRepository.findAll());
+        Iterable<Skill> skills = skillRepository.findAll();
+        model.addAttribute("skills", skills);
         //show all data when on employers
         return "skills/index";
     }
@@ -33,7 +33,7 @@ public class SkillController {
         return "skills/add";
     }
     @PostMapping("add")
-    public String processAddSkillForm(@ModelAttribute("skill") @Valid Skill newSkill, Errors errors, Model model) {
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return "skills/add";
@@ -42,7 +42,7 @@ public class SkillController {
         //save the data using the Repository
         skillRepository.save(newSkill);
 
-        return "redirect:/skills";
+        return "redirect:";
     }
 
     @GetMapping("view/{skillId}")

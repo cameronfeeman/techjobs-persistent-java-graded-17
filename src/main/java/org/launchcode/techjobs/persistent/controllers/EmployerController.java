@@ -35,7 +35,7 @@ public class EmployerController {
     }
 
     @PostMapping("add")
-    public String processAddEmployerForm(@ModelAttribute("employer") @Valid Employer newEmployer, Errors errors, Model model) {
+    public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
             return "employers/add";
@@ -44,7 +44,7 @@ public class EmployerController {
         //save the data using the Repository
         employerRepository.save(newEmployer);
 
-        return "redirect:/employers";
+        return "redirect:";
     }
 
     @GetMapping("view/{employerId}")
