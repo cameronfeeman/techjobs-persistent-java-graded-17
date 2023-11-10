@@ -14,3 +14,7 @@ WHERE location = 'St. Louis, City';
 DROP TABLE job;
 
 --Part 4
+SELECT DISTINCT skill.name
+FROM skill
+INNER JOIN job_skill ON skill.id = job_skill.skill_id
+ORDER BY skill.name ASC;

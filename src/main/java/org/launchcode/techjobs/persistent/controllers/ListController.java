@@ -23,6 +23,7 @@ import java.util.HashMap;
 @RequestMapping(value = "list")
 public class ListController {
 
+    //add necessary fields
     @Autowired
     private JobRepository jobRepository;
 
@@ -44,6 +45,7 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
+        // add employer and skills so the info can pass to the list.html field
         Iterable<Employer> employers = employerRepository.findAll();
         Iterable<Skill>  skills = skillRepository.findAll();
 

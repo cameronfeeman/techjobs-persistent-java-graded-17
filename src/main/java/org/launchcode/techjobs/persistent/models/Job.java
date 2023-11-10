@@ -25,6 +25,7 @@ public class Job extends AbstractEntity{
             joinColumns = @JoinColumn(name = "job_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")
     )
+    //add Skills
     private List<Skill> skills;
 
 
@@ -56,6 +57,7 @@ public class Job extends AbstractEntity{
         this.employer = employer;
     }
 
+    //edit to add in List to make many-many possible
     public List<Skill> getSkills() {
         return skills;
     }

@@ -76,9 +76,13 @@ public class HomeController {
 //        } else {
 //            return "redirect:/employer";
         }
-        //set the checked skills for the new job
-        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        //puts the skills into a list
+        List<Skill> skillObjs = (List<Skill>)
+       //retrieve list of skills using skill Id's and find all skills with those ids
+        skillRepository.findAllById(skills);
+        //assigns the skills for the new job
         newJob.setSkills(skillObjs);
+        //save the new job
         jobRepository.save(newJob);
 
         return "redirect:";
