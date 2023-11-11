@@ -54,7 +54,7 @@ public class SkillController {
             Skill skill = optionalSkill.get();
             model.addAttribute("skill", skill);
             //display it
-            return "skill/view";
+            return "skills/view";
             //if not found go back to skill list
         } else {
             return "redirect:../";
